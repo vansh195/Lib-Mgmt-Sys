@@ -17,6 +17,7 @@ PreparedStatement pst=null;
 ResultSet rs=null;
     private Object txtUsername;
     private Object txtPassword;
+    private Object jTextField_Username;
     /**
      * Creates new form Admin
      */
@@ -108,12 +109,13 @@ ResultSet rs=null;
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLoginActionPerformed
-        conn=MySql.ConnectDB();
+        conn=MySqlConnect.ConnectDB();
         String Sql="Select * from Admin where Username=? and password=?";
         try{
             pst=conn.prepareStatement(Sql);
-            pst.setString(1,txtUsername.getText());
-            pst.setString(2,txtPassword.getText());
+            pst.setString(1,jLabel1.getText());
+             pst.setString(2,jLabel2.getText());
+
             rs=pst.executeQuery();
             if(rs.next()){
                 JOptionPane.showMessageDialog(null,"Welcome User");
@@ -125,7 +127,7 @@ ResultSet rs=null;
             }
             else
             {
-                JOptionPane.showMessage(null,"Invalid Username or Password","Access Denied",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null,"Invalid Username or Password","Access Denied",JOptionPane.ERROR_MESSAGE);
             }
         } catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
